@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Update Employee</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="http://login2explore.com/jpdb/resources/js/0.0.3/jpdb-commons.js"></script>
+    <style>
+        #empid,#empname,#empemail {
+            width: 50rem;
+            padding: 1%;
+            margin-top: 2%;
+        }
+
+        #updatebtn {
+            margin-top: 1%;
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Update Employee Details</h2>
+        <div id="details">
+            <form id="updateEmp" action="post">
+                <div>
+                    <input type="text" id="empid" name="empid" placeholder="Enter Employee record you want to update">
+                </div>
+                <div>
+                    <input type="text" id="empname" name="empname" placeholder="Enter Employee Name">
+                </div>
+                <div>
+                    <input type="text" id="empemail" name="empemail" placeholder="Enter Employee email">
+                </div>
+                <div>
+                    <input type="button" id="updatebtn" value="Update" onclick="updateEmployee();">
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        function updateEmployee() {
+            var empNamevar = $('#empname').val();
+            var empEmailvar = $('#empemail').val();
+            var jsonObj = {
+                empName: empNamevar,
+                empEmail: empEmailvar
+            };
+            jsonStrObj = JSON.stringify(jsonObj)
+            //alert(jsonStrObj);
+            var Idreq = document.getElementById("empid").value
+            var updateReqStr = createUPDATERecordRequest("90938574|-31948824964717967|90946642", jsonStrObj, "SAMPLE", "Emp-Rel", Idreq);
+            //alert(updateReqStr)
+            jQuery.ajaxSetup({ async: false });
+            var resultObj = executeCommandAtGivenBaseUrl(updateReqStr, "http://api.login2explore.com:5577", "/api/iml");
+            alert('Record ' + Idreq + ' updated')
+            jQuery.ajaxSetup({ async: true });
+            $("#empid").val("")
+            $("#empname").val("");
+            $("#empemail").val("");
+        }
+    </script>
+</body>
+
+</html>

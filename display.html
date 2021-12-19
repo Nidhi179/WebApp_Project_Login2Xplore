@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Display Employee</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="http://login2explore.com/jpdb/resources/js/0.0.3/jpdb-commons.js"></script>
+    <style>
+        #detail{
+            margin-top: 1%;
+            height: 10rem;
+        }        
+        #getbtn {
+            margin-top: 1%;
+            background-color: #008CBA;
+            /* Green */
+            border: none;
+            color: white;
+            padding: 10px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Employee Details</h2>
+        <div id="details">
+            <input type="button" id="getbtn" value="Get Details" onclick="displayEmployee();">
+        </div>
+        <pre id="detail">
+          
+        </pre>
+    </div>
+    <script>
+        function displayEmployee() {
+            var getReqStr = createGETALLRecordRequest("90938574|-31948824964717967|90946642", "SAMPLE", "Emp-Rel",1,10,true,true);
+            //console.log(getReqStr);
+            jQuery.ajaxSetup({ async: false });
+            var resultObj = executeCommandAtGivenBaseUrl(getReqStr,
+                "http://api.login2explore.com:5577", "/api/irl");
+            var data=JSON.stringify(resultObj);
+            document.getElementById('detail').innerHTML=data;
+            jQuery.ajaxSetup({ async: true });
+        }
+    </script>
+</body>
+</html>
