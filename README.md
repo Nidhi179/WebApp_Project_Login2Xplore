@@ -17,8 +17,8 @@ Html,css,javascript,bootstrap,JsonPowerDB
   * Uses simple json format
   * Minimum Development cost
   * Minimum time to market
-  *Pluggable and user-defined api
-  *Serverless architecture
+  * Pluggable and user-defined api
+  * Serverless architecture
 
 **Release History (release of your JsonPowerDB related code on Github)**   
   * 0.1.0
